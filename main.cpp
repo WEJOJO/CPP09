@@ -132,12 +132,12 @@ int check_val(std::string &line_, std::deque<std::string> &_strs) { /// 지운 �
     return 1;
 }
 
-int main() {
+int main(int argc, char *argv[]) {
     std::ifstream myfile;
     std::ifstream stand;
     std::string line;
     ///////////////// !!!!!!!!!!!!!!!!!input 여러 파일 받도록 처리해주기
-    myfile.open("test.txt");////
+    // myfile.open("test.txt");////
     stand.open("data.csv");
     std::string key;
     bool flag;
@@ -158,53 +158,59 @@ int main() {
         }
     }
 	///////////////
-    // int j = 1;
-    // while(argv[j])
-    // {
-    //     myfile.open(argv[j]);
-    // }
-	///////////////
-    if (myfile.is_open()) {
-        flag = false;
-        while (getline(myfile, line)) { //date | value
-            std::deque<std::string> _strs;
-            if (line == "date | value")
-            {
-                if (flag == true)
+    int j = 1;
+    while(argv[j])
+    {
+        myfile.open(argv[j]);
+        if (myfile.is_open()) {
+            std::cout << "===========File Opened===========" << std::endl;
+            flag = false;
+            while (getline(myfile, line)) { //date | value
+                std::deque<std::string> _strs;
+                if (line == "date | value")
+                {
+                    if (flag == true)
+                    {
+                        std::cout << "Error: bad input => " << line << std::endl;
+                    }
+                    flag = true;
+                    continue;
+                }
+                if (check_val(line,_strs) == 0)
+                    continue;
+                // std::cout << "_strs[1] : " << _strs[1] << std::endl;
+                ////////////////////////////////////////////////////////////////////////////////
+                if (_strs[0] < standard.begin()->first) {
+                        std::cout << "Error: No Standard Data. => " << _strs[0] << std::endl;
+                        continue;
+                }
+                it = standard.lower_bound(_strs[0]); // lower??
+                _val = atof(_strs[1].c_str());
+                if (convertDouble(_val)!=_strs[1])
                 {
                     std::cout << "Error: bad input => " << line << std::endl;
                     continue;
                 }
-                flag = true;
+                if (standard.find(_strs[0]) != standard.end())
+                {
+                    std::cout << _strs[0] << " => " << _strs[1] << " = " <<  (it->second) * _val << std::endl; ///_ret이랑 곱하면 안될 것 같음.
+                }
+                else
+                {
+                    std::cout << _strs[0] << " => " << _strs[1] << " = " <<  ((--it)->second) * _val << std::endl;
+                }
+                ////////////////////////////////////////////////////////////////////////////////
             }
-            if (check_val(line,_strs) == 0)
-                continue;
-            // std::cout << "_strs[1] : " << _strs[1] << std::endl;
-            ////////////////////////////////////////////////////////////////////////////////
-            if (_strs[0] < standard.begin()->first) {
-                    std::cout << "Error: No Standard Data. => " << _strs[0] << std::endl;
-                    continue;
-            }
-            it = standard.lower_bound(_strs[0]); // lower??
-            _val = atof(_strs[1].c_str());
-            if (convertDouble(_val)!=_strs[1])
-            {
-                std::cout << "Error: bad input => " << line << std::endl;
-                continue;
-            }
-            if (standard.find(_strs[0]) != standard.end())
-            {
-                std::cout << _strs[0] << " => " << _strs[1] << " = " <<  (it->second) * _val << std::endl; ///_ret이랑 곱하면 안될 것 같음.
-            }
-            else
-            {
-                std::cout << _strs[0] << " => " << _strs[1] << " = " <<  ((--it)->second) * _val << std::endl;
-            }
-            ////////////////////////////////////////////////////////////////////////////////
+            myfile.close();
+            stand.close();
         }
-        myfile.close();
-        stand.close();
+        else
+        {
+            std::cout << "file does not opened" << std::endl;
+        }
+        j++;
     }
+	///////////////
 }
 
 /// atoi의 근거/////
