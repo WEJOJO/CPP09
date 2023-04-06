@@ -32,7 +32,7 @@ void MakeSort(int st, int mid, int end, std::vector<int> &_origin) {
 // std::vector<int> MergeSort()
 void MergeSort(std::vector<int> &_origin, int st, int end) {
     int mid;
-    if (st == end) // k에 대한 삽입정렬 추가할 것.
+    if (st == end) // deque로 처리할 것이라면 ex00서 빼기
         return;
 
     int _size = end - st + 1;
@@ -47,6 +47,10 @@ int main(int argc, char *argv[]) {
     std::vector<int> origin;
     std::string token;
 
+    if (argc != 2) {
+        std::cout << "arg ERR" << std::endl;
+        exit(1);
+    }
     int i = 1;
     while (argv[i]) {
         std::stringstream ss(argv[i]);
@@ -62,5 +66,6 @@ int main(int argc, char *argv[]) {
     MergeSort(origin, 0, origin.size() - 1);
     std::cout << "=======in Main========" << std::endl;
     for (int j = 0; j < origin.size(); j++)
-        std::cout << origin[j] << std::endl;
+        std::cout << origin[j] << " ";
+    std::cout << std::endl;
 }
