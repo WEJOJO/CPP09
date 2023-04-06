@@ -1,11 +1,11 @@
 #ifndef BITCOINEXCHANGE_HPP
 #define BITCOINEXCHANGE_HPP
 
-#include <iomanip>
-#include <iostream>
 #include <cstdlib>
 #include <deque>
 #include <fstream>
+#include <iomanip>
+#include <iostream>
 #include <map>
 #include <sstream>
 
@@ -14,7 +14,7 @@ class BitcoinExchange {
     std::map<std::string, double> standard;
     std::ifstream myfile;
     std::ifstream stand;
-    void  MakeMap();
+    void MakeMap();
 
   public:
     BitcoinExchange();
