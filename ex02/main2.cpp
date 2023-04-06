@@ -4,12 +4,23 @@
 #include <vector>
 #include <deque>
 
-//////
+/////////
+#include <sys/time.h>
 #include <chrono>
+void myMethod() {
+  auto start = std::chrono::high_resolution_clock::now();
 
-void MakeSort(int st, int mid, int end, std::vector<int> &_origin) {
-    std::vector<int> t1;
-    std::vector<int> t2;
+  // 메소드 실행 코드
+
+  auto end = std::chrono::high_resolution_clock::now();
+  auto elapsed = std::chrono::duration_cast<std::chrono::milliseconds>(end - start);
+
+  std::cout << "Elapsed time: " << elapsed.count() << " milliseconds" << std::endl;
+}
+////////////
+void MakeSort(int st, int mid, int end, std::deque<int> &_origin) {
+    std::deque<int> t1;
+    std::deque<int> t2;
     int t1_ind = 0;
     int t2_ind = 0;
     int t_st = st;
@@ -33,7 +44,7 @@ void MakeSort(int st, int mid, int end, std::vector<int> &_origin) {
     }
 }
 
-void InsertSort(std::vector<int> &arr, int st, int end)
+void InsertSort(std::deque<int> &arr, int st, int end)
 {
     int stand;
     int back_ind;
@@ -63,7 +74,7 @@ void InsertSort(std::vector<int> &arr, int st, int end)
     ////////////////////
 }
 // std::vector<int> MergeSort()
-void MergeSort(std::vector<int> &_origin, int st, int end) { //함수명 바꿔줄 것.
+void MergeSort(std::deque<int> &_origin, int st, int end) { //함수명 바꿔줄 것.
     int mid;
     if (end-st+1 <= 100)///길이가 10이하인 배열에 관하여... // deque로 처리할 것이라면 ex00서 빼기 //(st == end) k==10인 상황
     {
@@ -85,7 +96,7 @@ void MergeSort(std::vector<int> &_origin, int st, int end) { //함수명 바꿔�
 }
 
 int main(int argc, char *argv[]) {
-    std::vector<int> origin;
+    std::deque<int> origin;
     std::string token;
 
     if (argc != 2) {
@@ -103,12 +114,13 @@ int main(int argc, char *argv[]) {
     //_origin print
     // for (int j = 0; j < origin.size(); j++)
     //     std::cout << origin[j] << std::endl;
+
+
     auto start = std::chrono::high_resolution_clock::now();
     MergeSort(origin, 0, origin.size() - 1);
     auto end = std::chrono::high_resolution_clock::now();
     auto duration = std::chrono::duration_cast<std::chrono::microseconds>(end - start);
     std::cout << "수행 시간: " << duration.count() << " 마이크로초" << std::endl;
-
     std::cout << "=======in Main========" << std::endl;
     for (int j = 0; j < origin.size(); j++)
         std::cout << origin[j] << " ";
