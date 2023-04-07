@@ -6,17 +6,18 @@
 #include <queue>
 #include <sstream>
 #include <stack>
+#include <iomanip>
 
 class RPN {
   private:
     std::stack<int> my_stack;
+    RPN();
 
   public:
-    RPN();
+    RPN(char *argv[]);
     RPN(const RPN &ref);
     ~RPN();
     RPN &operator=(const RPN &ref);
-    void Calculator(char *_arg);
 };
 
 #endif
