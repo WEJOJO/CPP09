@@ -22,7 +22,7 @@ int main(int argc, char *argv[]) {
             }
             if (token[0] == '*' || token[0] == '+' || token[0] == '-' ||
                 token[0] == '/') {
-                if (my_stack.size() < 2) {
+                if (my_stack.size() < 2) { //-이고 뒤에 숫자인 경우 예외를 둔다
                     std::cout << "Err : nums of args" << std::endl;
                     exit(1);
                 }
