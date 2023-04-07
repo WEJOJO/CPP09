@@ -100,14 +100,14 @@ int main(int argc, char *argv[]) {
             origin.push_back(atoi(token.c_str()));
         i++;
     }
-    //_origin print
-    // for (int j = 0; j < origin.size(); j++)
-    //     std::cout << origin[j] << std::endl;
-    auto start = std::chrono::high_resolution_clock::now();
+
+    std::chrono::time_point<std::chrono::high_resolution_clock> start = std::chrono::high_resolution_clock::now();
     MergeSort(origin, 0, origin.size() - 1);
-    auto end = std::chrono::high_resolution_clock::now();
-    auto duration = std::chrono::duration_cast<std::chrono::microseconds>(end - start);
-    std::cout << "수행 시간: " << duration.count() << " 마이크로초" << std::endl;
+    std::chrono::time_point<std::chrono::high_resolution_clock> end = std::chrono::high_resolution_clock::now();
+    std::chrono::nanoseconds duration = std::chrono::duration_cast<std::chrono::nanoseconds>((end - start));
+    std::cout << "수행 시간: " << duration.count()*0.001 << " us" << std::endl;
+
+
 
     std::cout << "=======in Main========" << std::endl;
     for (int j = 0; j < origin.size(); j++)
