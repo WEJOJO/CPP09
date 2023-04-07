@@ -2,7 +2,9 @@
 #define BITCOINEXCHANGE_HPP
 
 #include <cstdlib>
-#include <deque>
+// #include <deque>//
+#include <cmath>
+#include <queue>
 #include <fstream>
 #include <iomanip>
 #include <iostream>
@@ -23,10 +25,10 @@ class BitcoinExchange {
     ~BitcoinExchange();
 
     void MakeChange(char *_argv);
-    int ValidationCheck(std::string &line_, std::deque<std::string> &_strs);
+    int ValidationCheck(std::string &line_, std::queue<std::string> &_strs);
     bool IsLeapYear(int year);
     bool IsValidDate(int year, int month, int day);
-    std::deque<std::string> Split(std::string input, char delimiter);
+    std::queue<std::string> Split(std::string input, char delimiter);
     std::string ConvertDouble(double value);
 };
 
