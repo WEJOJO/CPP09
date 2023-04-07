@@ -1,11 +1,15 @@
 #ifndef RPN_HPP
 #define RPN_HPP
 
+#include <cstdlib>
+#include <iostream>
+#include <queue>
+#include <sstream>
 #include <stack>
 
 class RPN {
   private:
-    std::stack<int> _stack;
+    std::stack<int> my_stack;
 
   public:
     RPN();
