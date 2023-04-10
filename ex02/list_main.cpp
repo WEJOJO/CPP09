@@ -68,17 +68,19 @@ void InsertSort(std::list<int> &arr, int st, int end)
     {
         back_iter = iter;
         stand = *iter; //주석처리X 담고있어야 함
-        curr_iter = iter--; //한 칸 전 담기
+        iter--;
+        curr_iter = iter; //한 칸 전 담기
         iter++; //iter 원상 복구
-        while(curr_iter!=start_iter)//start_iter인 부분 와일 후에 처리 필요
+        while(curr_iter!=arr.begin() && curr_iter!=start_iter)//start_iter인 부분 와일 후에 처리 필요
         {
-            if (*iter < *curr_iter)
+            if (stand < *curr_iter)//*iter
             {
                 *back_iter = *curr_iter;
                 back_iter--;
             }
+            curr_iter--;
         }
-        if (*iter < *curr_iter)
+        if (stand < *curr_iter)
         {
                 *back_iter = *curr_iter;
                 back_iter--;
@@ -97,6 +99,8 @@ void MergeSort(std::list<int> &_origin, int st, int end) { //함수명 바꿔줄
         return;
     }
 
+    // if (end == st)
+    //     return ;
     int _size = end - st + 1;
     mid = ((st + end) / 2);
     MergeSort(_origin, st, mid);
