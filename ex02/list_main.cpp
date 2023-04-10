@@ -1,8 +1,6 @@
 #include <cstdlib>
 #include <iostream>
 #include <sstream>
-#include <vector>
-#include <deque>
 #include <list>
 
 //////
@@ -48,52 +46,56 @@ void MakeSort(int st, int mid, int end, std::list<int> &_origin) {
     }
 }
 
-void InsertSort(std::vector<int> &arr, int st, int end)
+void InsertSort(std::list<int> &arr, int st, int end)
 {
     int stand;
-    int back_ind;
+    std::list<int>::iterator iter;
+    std::list<int>::iterator back_iter;
+    std::list<int>::iterator start_iter;
+    std::list<int>::iterator curr_iter;
 
-    // std::cout << "=====before InsertSort=====" << std::endl;
-    // for (int i = st; i <= end; i++)
-    //     std::cout << arr[i] << " ";
-    // std::cout << std::endl;
-
-    for (int stand_ind = st + 1; stand_ind <= end; stand_ind++) {
-        back_ind = stand_ind;
-        stand = arr[stand_ind];
-        for (int curr = stand_ind - 1; curr >= st; curr--) //st!
-            if (stand < arr[curr]) {
-                arr[back_ind] = arr[curr];
-                back_ind--;
-            }
-        arr[back_ind] = stand;
+    int i = 0;
+    iter = arr.begin();
+    while(i<st)
+    {
+        iter++;
+        i++;
     }
-    ////check Insert////
-    // std::cout << "=====after InsertSort=====" << std::endl;
-    // std::cout << "st :" << st << std::endl;
-    // std::cout << "end :" << end << std::endl;
-    // for (int i = st; i <= end; i++)
-    //     std::cout << arr[i] << " ";
-    // std::cout << std::endl;
-    ////////////////////
+    start_iter = iter;//변화없음
+    iter++;
+    i++;
+    while(i<=end)
+    {
+        back_iter = iter;
+        stand = *iter; //주석처리X 담고있어야 함
+        curr_iter = iter--; //한 칸 전 담기
+        iter++; //iter 원상 복구
+        while(curr_iter!=start_iter)//start_iter인 부분 와일 후에 처리 필요
+        {
+            if (*iter < *curr_iter)
+            {
+                *back_iter = *curr_iter;
+                back_iter--;
+            }
+        }
+        if (*iter < *curr_iter)
+        {
+                *back_iter = *curr_iter;
+                back_iter--;
+        }
+        *back_iter = stand;
+        iter++;
+        i++;
+    }
 }
-// std::vector<int> MergeSort()
+
 void MergeSort(std::list<int> &_origin, int st, int end) { //함수명 바꿔줄 것.
     int mid;
-    // if (end-st+1 <= 100)///길이가 10이하인 배열에 관하여... // deque로 처리할 것이라면 ex00서 빼기 //(st == end) k==10인 상황
-    // {
-    //     InsertSort(_origin,st,end);
-    //     return;
-    // }
-	if (st==end)
-	{
-		return ;
-	}
-
-    ////////////////MergeSort Only////////////////
-    // if (end==st)
-    //     return;
-    ////////////////MergeSort Only////////////////
+    if (end-st+1 <= 100)///길이가 10이하인 배열에 관하여... // deque로 처리할 것이라면 ex00서 빼기 //(st == end) k==10인 상황
+    {
+        InsertSort(_origin,st,end);
+        return;
+    }
 
     int _size = end - st + 1;
     mid = ((st + end) / 2);
