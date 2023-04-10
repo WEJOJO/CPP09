@@ -1,7 +1,3 @@
-#include <cstdlib>
-#include <iostream>
-#include <sstream>
-#include <stack>
 #include "RPN.hpp"
 
 int main(int argc, char *argv[]) {

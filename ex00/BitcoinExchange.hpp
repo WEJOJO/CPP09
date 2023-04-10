@@ -2,7 +2,6 @@
 #define BITCOINEXCHANGE_HPP
 
 #include <cstdlib>
-#include <cmath>
 #include <queue>
 #include <fstream>
 #include <iomanip>

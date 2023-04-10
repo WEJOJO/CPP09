@@ -28,6 +28,7 @@ RPN::RPN(char *argv[])
 {
     int i = 1;
     int t1,t2 = 0;
+    int token_cnt = 0;
     while (argv[i]) {
         std::stringstream ss(argv[i]);
         std::string token;
@@ -52,15 +53,19 @@ RPN::RPN(char *argv[])
                 my_stack.pop();
                 if (token[0] == '*') {
                     my_stack.push(t1 * t2);
+                    token_cnt++;
                     continue;
                 } else if (token[0] == '+') {
                     my_stack.push(t1 + t2);
+                    token_cnt++;
                     continue;
                 } else if (token[0] == '-') {
                     my_stack.push(t1 - t2);
+                    token_cnt++;
                     continue;
                 } else {
                     my_stack.push(t1 / t2);
+                    token_cnt++;
                     continue;
                 }
             } else {
@@ -76,10 +81,11 @@ RPN::RPN(char *argv[])
                 }
                 my_stack.push(atoi(token.c_str()));
             }
+            token_cnt++;
         }
         i++;
     }
-    if (my_stack.size() != 1) {
+    if (my_stack.size() != 1 || token_cnt == 1) {
         std::cout << "Error: Operand too many" << std::endl;
         exit(1);
     }
