@@ -7,12 +7,12 @@ int main(int argc, char *argv[]) {
         std::cout << "arg ERR" << std::endl;
         exit(1);
     }
-
     PmergeMe   pmerge_me(argv);
+    pmerge_me.PrintOriginal();
 
     pmerge_me.CallMergeInsertSort();
-
     pmerge_me.PrintVectorSort();
-    pmerge_me.PrintDequeSort();
-    pmerge_me.PrintListSort();
+
+    // pmerge_me.PrintDequeSort();
+    // pmerge_me.PrintListSort();
 }

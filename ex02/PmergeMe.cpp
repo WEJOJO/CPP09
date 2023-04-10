@@ -308,7 +308,7 @@ void PmergeMe::CallMergeInsertSort()
 
 void PmergeMe::PrintVectorSort()
 {
-	std::cout << "=======vector========" << std::endl;
+	std::cout << "After: ";
     for (int j = 0; j < (int)this->origin_vector.size(); j++)
         std::cout << this->origin_vector[j] << " ";
     std::cout << std::endl;
@@ -316,7 +316,7 @@ void PmergeMe::PrintVectorSort()
 
 void PmergeMe::PrintListSort()
 {
-	std::cout << "=======list========" << std::endl;
+	std::cout << "After: ";
 	std::list<int>::iterator o_iter;
 	o_iter = this->origin_list.begin();
 	for (;o_iter!=this->origin_list.end();o_iter++)
@@ -326,7 +326,7 @@ void PmergeMe::PrintListSort()
 
 void PmergeMe::PrintDequeSort()
 {
-	std::cout << "=======deque========" << std::endl;
+	std::cout << "After: ";
     for (int j = 0; j < (int)this->origin_deque.size(); j++)
         std::cout << this->origin_deque[j] << " ";
     std::cout << std::endl;
@@ -347,4 +347,13 @@ std::list<int>& PmergeMe::GetOriginList()
 std::deque<int>& PmergeMe::GetOriginDeque()
 {
 	return this->origin_deque;
+}
+
+
+void PmergeMe::PrintOriginal()
+{
+	std::cout << "Before: ";
+    for (int j = 0; j < (int)this->origin_vector.size(); j++)
+        std::cout << this->origin_vector[j] << " ";
+    std::cout << std::endl;
 }

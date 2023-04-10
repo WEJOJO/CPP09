@@ -44,6 +44,7 @@ public:
 	std::vector<int>& GetOriginVector();
 	std::list<int>& GetOriginList();
 	std::deque<int>& GetOriginDeque();
+	void PrintOriginal();
 	//////////////////////////////////////////////////
 	//////////////////////////////////////////////////
 };
