@@ -16,11 +16,11 @@ class BitcoinExchange {
     std::ifstream myfile;
     std::ifstream stand;
     void MakeMap();
+    BitcoinExchange &operator=(const BitcoinExchange &ref);
+    BitcoinExchange(const BitcoinExchange &ref);
 
   public:
     BitcoinExchange();
-    BitcoinExchange(const BitcoinExchange &ref);
-    BitcoinExchange &operator=(const BitcoinExchange &ref);
     ~BitcoinExchange();
 
     void MakeChange(char *_argv);

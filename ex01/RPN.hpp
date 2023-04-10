@@ -12,12 +12,12 @@ class RPN {
   private:
     std::stack<int> my_stack;
     RPN();
+    RPN(const RPN &ref);
+    RPN &operator=(const RPN &ref);
 
   public:
     RPN(char *argv[]);
-    RPN(const RPN &ref);
     ~RPN();
-    RPN &operator=(const RPN &ref);
 };
 
 #endif

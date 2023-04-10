@@ -14,6 +14,10 @@ private:
 	std::vector<int> origin_vector;
     std::deque<int> origin_deque;
     std::list<int> origin_list;
+	std::chrono::nanoseconds duration_vector;
+	std::chrono::nanoseconds duration_list;
+	std::chrono::nanoseconds duration_deque;
+
 	PmergeMe();
 	PmergeMe(const PmergeMe& ref);
 
@@ -30,11 +34,11 @@ private:
 	void MergeSortVector(std::vector<int> &_origin, int st, int end);
 	void MergeSortList(std::list<int> &_origin, int st, int end);
 	void MergeSortDeque(std::deque<int> &_origin, int st, int end);
+	PmergeMe&	operator=(const PmergeMe& ref);
 
 public:
 	PmergeMe(char *argv[]);
 	~PmergeMe();
-	PmergeMe&	operator=(const PmergeMe& ref);
 
 	void Itos(int num, std::string &ret);
 	void CallMergeInsertSort();
@@ -47,6 +51,11 @@ public:
 	void PrintOriginal();
 	//////////////////////////////////////////////////
 	//////////////////////////////////////////////////
+	std::chrono::nanoseconds GetDurationVector();
+	std::chrono::nanoseconds GetDurationDeque();
+	std::chrono::nanoseconds GetDurationList();
+
+
 };
 
 #endif

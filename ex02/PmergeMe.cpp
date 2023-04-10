@@ -300,9 +300,23 @@ void PmergeMe::Itos(int num, std::string &ret) {
 
 void PmergeMe::CallMergeInsertSort()
 {
+    std::chrono::time_point<std::chrono::high_resolution_clock> start;
+    std::chrono::time_point<std::chrono::high_resolution_clock> end;
+    start = std::chrono::high_resolution_clock::now();
 	MergeSortVector(GetOriginVector(), 0, GetOriginVector().size() - 1);
+    end = std::chrono::high_resolution_clock::now();
+    this->duration_vector = std::chrono::duration_cast<std::chrono::nanoseconds>((end - start));
+
+
+    start = std::chrono::high_resolution_clock::now();
 	MergeSortList(GetOriginList(), 0, GetOriginList().size() - 1);
+    end = std::chrono::high_resolution_clock::now();
+    this->duration_list = std::chrono::duration_cast<std::chrono::nanoseconds>((end - start));
+
+    start = std::chrono::high_resolution_clock::now();
 	MergeSortDeque(GetOriginDeque(), 0, GetOriginDeque().size() - 1);
+    end = std::chrono::high_resolution_clock::now();
+    this->duration_deque = std::chrono::duration_cast<std::chrono::nanoseconds>((end - start));
 }
 
 
@@ -356,4 +370,17 @@ void PmergeMe::PrintOriginal()
     for (int j = 0; j < (int)this->origin_vector.size(); j++)
         std::cout << this->origin_vector[j] << " ";
     std::cout << std::endl;
+}
+
+std::chrono::nanoseconds PmergeMe::GetDurationVector()
+{
+    return this->duration_vector;
+}
+std::chrono::nanoseconds PmergeMe::GetDurationDeque()
+{
+    return this->duration_deque;
+}
+std::chrono::nanoseconds PmergeMe::GetDurationList()
+{
+    return this->duration_list;
 }
