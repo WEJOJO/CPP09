@@ -1,6 +1,3 @@
-#include <iostream>
-#include <iomanip>
-
 #include "PmergeMe.hpp"
 
 PmergeMe::PmergeMe()
@@ -300,23 +297,33 @@ void PmergeMe::Itos(int num, std::string &ret) {
 
 void PmergeMe::CallMergeInsertSort()
 {
-    std::chrono::time_point<std::chrono::high_resolution_clock> start;
-    std::chrono::time_point<std::chrono::high_resolution_clock> end;
-    start = std::chrono::high_resolution_clock::now();
+    clock_t start, end;
+
+    start = clock();
 	MergeSortVector(GetOriginVector(), 0, GetOriginVector().size() - 1);
-    end = std::chrono::high_resolution_clock::now();
-    this->duration_vector = std::chrono::duration_cast<std::chrono::nanoseconds>((end - start));
+    end = clock();
+    this->duration_vector = static_cast<double>(end - start) / CLOCKS_PER_SEC;
+    this->duration_vector *= 1000000;
 
 
-    start = std::chrono::high_resolution_clock::now();
+    start = clock();
 	MergeSortList(GetOriginList(), 0, GetOriginList().size() - 1);
-    end = std::chrono::high_resolution_clock::now();
-    this->duration_list = std::chrono::duration_cast<std::chrono::nanoseconds>((end - start));
+    end = clock();
+    this->duration_list = static_cast<double>(end - start) / CLOCKS_PER_SEC;
+    this->duration_list *= 1000000;
 
-    start = std::chrono::high_resolution_clock::now();
+
+
+    start = clock();
 	MergeSortDeque(GetOriginDeque(), 0, GetOriginDeque().size() - 1);
-    end = std::chrono::high_resolution_clock::now();
-    this->duration_deque = std::chrono::duration_cast<std::chrono::nanoseconds>((end - start));
+    end = clock();
+    this->duration_deque = static_cast<double>(end - start) / CLOCKS_PER_SEC;
+    this->duration_deque *= 1000000;
+
+    // start = std::chrono::high_resolution_clock::now();
+	// MergeSortDeque(GetOriginDeque(), 0, GetOriginDeque().size() - 1);
+    // end = std::chrono::high_resolution_clock::now();
+    // this->duration_deque = std::chrono::duration_cast<std::chrono::nanoseconds>((end - start));
 }
 
 
@@ -372,15 +379,15 @@ void PmergeMe::PrintOriginal()
     std::cout << std::endl;
 }
 
-std::chrono::nanoseconds PmergeMe::GetDurationVector()
+double PmergeMe::GetDurationVector()
 {
     return this->duration_vector;
 }
-std::chrono::nanoseconds PmergeMe::GetDurationDeque()
+double PmergeMe::GetDurationDeque()
 {
     return this->duration_deque;
 }
-std::chrono::nanoseconds PmergeMe::GetDurationList()
+double PmergeMe::GetDurationList()
 {
     return this->duration_list;
 }

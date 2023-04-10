@@ -7,6 +7,8 @@
 #include <vector>
 #include <deque>
 #include <list>
+#include <iomanip>
+#include <ctime>
 
 class PmergeMe
 {
@@ -14,9 +16,10 @@ private:
 	std::vector<int> origin_vector;
     std::deque<int> origin_deque;
     std::list<int> origin_list;
-	std::chrono::nanoseconds duration_vector;
-	std::chrono::nanoseconds duration_list;
-	std::chrono::nanoseconds duration_deque;
+	double	duration_vector;
+	// std::chrono::nanoseconds duration_vector;
+	double duration_list;
+	double duration_deque;
 
 	PmergeMe();
 	PmergeMe(const PmergeMe& ref);
@@ -51,9 +54,9 @@ public:
 	void PrintOriginal();
 	//////////////////////////////////////////////////
 	//////////////////////////////////////////////////
-	std::chrono::nanoseconds GetDurationVector();
-	std::chrono::nanoseconds GetDurationDeque();
-	std::chrono::nanoseconds GetDurationList();
+	double GetDurationVector();
+	double GetDurationDeque();
+	double GetDurationList();
 
 
 };

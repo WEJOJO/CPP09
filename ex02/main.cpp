@@ -1,7 +1,5 @@
 #include "PmergeMe.hpp"
 
-#include <chrono>/////
-
 int main(int argc, char *argv[]) {
     if (argc < 2) {
         std::cout << "arg ERR" << std::endl;
@@ -12,9 +10,11 @@ int main(int argc, char *argv[]) {
     pmerge_me.CallMergeInsertSort();
     pmerge_me.PrintVectorSort();
 
-    std::cout << "Time to process a range of  " << pmerge_me.GetOriginVector().size() << " elements with std::vector : " << pmerge_me.GetDurationVector().count()*0.001 << " us" << std::endl;
-    std::cout << "Time to process a range of  " << pmerge_me.GetOriginDeque().size() << " elements with std::deque : " << pmerge_me.GetDurationDeque().count()*0.001 << " us" << std::endl;
-    std::cout << "Time to process a range of  " << pmerge_me.GetOriginList().size() << " elements with std::list : " << pmerge_me.GetDurationList().count()*0.001 << " us" << std::endl;
+    // 2500mc >>> 2500.00000mc
+
+    std::cout << "Time to process a range of  " << pmerge_me.GetOriginVector().size() << " elements with std::vector : " << std::fixed << std::setprecision(5) << pmerge_me.GetDurationVector() << " us" << std::endl;
+    std::cout << "Time to process a range of  " << pmerge_me.GetOriginDeque().size() << " elements with std::deque : " << pmerge_me.GetDurationDeque() << " us" << std::endl;
+    std::cout << "Time to process a range of  " << pmerge_me.GetOriginList().size() << " elements with std::list : " << pmerge_me.GetDurationList() << " us" << std::endl;
 
     // std::chrono::time_point<std::chrono::high_resolution_clock> start = std::chrono::high_resolution_clock::now();
     // MergeSortVector(origin_vector, 0, origin_vector.size() - 1);
