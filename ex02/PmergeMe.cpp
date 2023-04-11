@@ -297,28 +297,23 @@ void PmergeMe::Itos(int num, std::string &ret) {
 
 void PmergeMe::CallMergeInsertSort()
 {
-    clock_t start, end;
+    clock_t  start, end;
 
     start = clock();
 	MergeSortVector(GetOriginVector(), 0, GetOriginVector().size() - 1);
     end = clock();
-    this->duration_vector = static_cast<double>(end - start) / CLOCKS_PER_SEC;
-    this->duration_vector *= 1000000;
+    this->duration_vector = ((double) (end - start));
 
 
     start = clock();
 	MergeSortList(GetOriginList(), 0, GetOriginList().size() - 1);
     end = clock();
-    this->duration_list = static_cast<double>(end - start) / CLOCKS_PER_SEC;
-    this->duration_list *= 1000000;
-
-
+    this->duration_list = ((double) (end - start));
 
     start = clock();
 	MergeSortDeque(GetOriginDeque(), 0, GetOriginDeque().size() - 1);
     end = clock();
-    this->duration_deque = static_cast<double>(end - start) / CLOCKS_PER_SEC;
-    this->duration_deque *= 1000000;
+    this->duration_deque = ((double) (end - start));
 
     // start = std::chrono::high_resolution_clock::now();
 	// MergeSortDeque(GetOriginDeque(), 0, GetOriginDeque().size() - 1);
@@ -379,7 +374,7 @@ void PmergeMe::PrintOriginal()
     std::cout << std::endl;
 }
 
-double PmergeMe::GetDurationVector()
+double PmergeMe::GetDurationVector()/////
 {
     return this->duration_vector;
 }

@@ -12,7 +12,7 @@ int main(int argc, char *argv[]) {
 
     // 2500mc >>> 2500.00000mc
 
-    std::cout << "Time to process a range of  " << pmerge_me.GetOriginVector().size() << " elements with std::vector : " << std::fixed << std::setprecision(5) << pmerge_me.GetDurationVector() << " us" << std::endl;
+    std::cout << "Time to process a range of  " << pmerge_me.GetOriginVector().size() << " elements with std::vector : " << pmerge_me.GetDurationVector() << " us" << std::endl;
     std::cout << "Time to process a range of  " << pmerge_me.GetOriginDeque().size() << " elements with std::deque : " << pmerge_me.GetDurationDeque() << " us" << std::endl;
     std::cout << "Time to process a range of  " << pmerge_me.GetOriginList().size() << " elements with std::list : " << pmerge_me.GetDurationList() << " us" << std::endl;
 

@@ -2,13 +2,13 @@
 # define PMERGEME_HPP
 
 #include <cstdlib>
+#include <ctime>
 #include <iostream>
 #include <sstream>
+#include <iomanip>
 #include <vector>
 #include <deque>
 #include <list>
-#include <iomanip>
-#include <ctime>
 
 class PmergeMe
 {
@@ -16,10 +16,10 @@ private:
 	std::vector<int> origin_vector;
     std::deque<int> origin_deque;
     std::list<int> origin_list;
-	double	duration_vector;
-	// std::chrono::nanoseconds duration_vector;
+	double duration_vector;
 	double duration_list;
 	double duration_deque;
+
 
 	PmergeMe();
 	PmergeMe(const PmergeMe& ref);
@@ -57,8 +57,6 @@ public:
 	double GetDurationVector();
 	double GetDurationDeque();
 	double GetDurationList();
-
-
 };
 
 #endif
