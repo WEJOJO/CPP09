@@ -24,10 +24,9 @@ RPN &RPN::operator=(const RPN &ref) {
 }
 ////////////////////////////////Orthodox////////////////////////////////
 
-RPN::RPN(char *argv[])
-{
+RPN::RPN(char *argv[]) {
     int i = 1;
-    int t1,t2 = 0;
+    long t1, t2 = 0;
     int token_cnt = 0;
     while (argv[i]) {
         std::stringstream ss(argv[i]);
@@ -37,14 +36,16 @@ RPN::RPN(char *argv[])
                 std::cout << "Error: arg length must <= 2" << std::endl;
                 exit(1);
             }
-            if (token.length() == 2 && (token[0]!='-' || token[1] < 48 || token[1] > 57)) {
+            if (token.length() == 2 &&
+                (token[0] != '-' || token[1] < 48 || token[1] > 57)) {
                 std::cout << "Error: Operand / Operator Error" << std::endl;
                 exit(1);
             }
-            if (token.length() == 1 && (token[0] == '*' || token[0] == '+' || token[0] == '-' ||
-                token[0] == '/')) {
+            if (token.length() == 1 && (token[0] == '*' || token[0] == '+' ||
+                                        token[0] == '-' || token[0] == '/')) {
                 if (my_stack.size() < 2) {
-                    std::cout << "Error: Not Enough Operand Before Operator" << std::endl;
+                    std::cout << "Error: Not Enough Operand Before Operator"
+                              << std::endl;
                     exit(1);
                 }
                 t2 = my_stack.top();
@@ -52,30 +53,44 @@ RPN::RPN(char *argv[])
                 t1 = my_stack.top();
                 my_stack.pop();
                 if (token[0] == '*') {
+                    if ((t1 * t2) > INT_MAX || (t1 * t2) < INT_MIN) {
+                        std::cout << "Error: Int Overflow" << std::endl;
+                        exit(1);
+                    }
                     my_stack.push(t1 * t2);
                     token_cnt++;
                     continue;
                 } else if (token[0] == '+') {
+                    if ((t1 + t2) > INT_MAX || (t1 + t2) < INT_MIN) {
+                        std::cout << "Error: Int Overflow" << std::endl;
+                        exit(1);
+                    }
                     my_stack.push(t1 + t2);
                     token_cnt++;
                     continue;
                 } else if (token[0] == '-') {
+                    if ((t1 - t2) > INT_MAX || (t1 - t2) < INT_MIN) {
+                        std::cout << "Error: Int Overflow" << std::endl;
+                        exit(1);
+                    }
                     my_stack.push(t1 - t2);
                     token_cnt++;
                     continue;
                 } else {
+                    if (t2 == 0) {
+                        std::cout << "Error: Divided by 0" << std::endl;
+                        exit(1);
+                    }
                     my_stack.push(t1 / t2);
                     token_cnt++;
                     continue;
                 }
             } else {
-                if (token[0]=='-' && (token[1] < 48 || token[1] > 57))
-                {
+                if (token[0] == '-' && (token[1] < 48 || token[1] > 57)) {
                     std::cout << "Error: Operand Error" << std::endl;
                     exit(1);
                 }
-                if (token.length()==1 && (token[0] < 48 || token[0] > 57))
-                {
+                if (token.length() == 1 && (token[0] < 48 || token[0] > 57)) {
                     std::cout << "Error: Operand Error" << std::endl;
                     exit(1);
                 }
