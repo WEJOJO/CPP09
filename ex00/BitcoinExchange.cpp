@@ -10,7 +10,10 @@ BitcoinExchange::BitcoinExchange() {
     if (this->stand.is_open())
         MakeMap();
     else
+    {
         std::cout << "File Err" << std::endl;
+        exit(1);
+    }
 }
 
 BitcoinExchange::BitcoinExchange(const BitcoinExchange &ref) {
@@ -192,7 +195,7 @@ int BitcoinExchange::ValidationCheck(
         std::cout << "Error: too large a number." << std::endl;
         return 0;
     }
-    if (check < 0) {
+    if (check < 0.0) {
         std::cout << "Error: not a positive number." << std::endl;
         return 0;
     }

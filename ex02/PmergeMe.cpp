@@ -297,28 +297,28 @@ void PmergeMe::Itos(int num, std::string &ret) {
 
 void PmergeMe::CallMergeInsertSort()
 {
-    clock_t  start, end;
-
-    start = clock();
+    struct timespec t;
+    t.tv_nsec = 0;
+    t.tv_sec = 0;
+    clock_settime(CLOCK_PROCESS_CPUTIME_ID, &t);
 	MergeSortVector(GetOriginVector(), 0, GetOriginVector().size() - 1);
-    end = clock();
-    this->duration_vector = ((double) (end - start));
+    clock_gettime(CLOCK_PROCESS_CPUTIME_ID, &t);
+    this->duration_vector = ((double)(t.tv_sec * 1000.0) + ((double)(t.tv_nsec)*0.000001));
 
-
-    start = clock();
+    t.tv_nsec = 0;
+    t.tv_sec = 0;
+    clock_settime(CLOCK_PROCESS_CPUTIME_ID, &t);
 	MergeSortList(GetOriginList(), 0, GetOriginList().size() - 1);
-    end = clock();
-    this->duration_list = ((double) (end - start));
+    clock_gettime(CLOCK_PROCESS_CPUTIME_ID, &t);
+    this->duration_list = ((double)(t.tv_sec * 1000.0) + ((double)(t.tv_nsec)*0.000001));
 
-    start = clock();
+
+    t.tv_nsec = 0;
+    t.tv_sec = 0;
+    clock_settime(CLOCK_PROCESS_CPUTIME_ID, &t);
 	MergeSortDeque(GetOriginDeque(), 0, GetOriginDeque().size() - 1);
-    end = clock();
-    this->duration_deque = ((double) (end - start));
-
-    // start = std::chrono::high_resolution_clock::now();
-	// MergeSortDeque(GetOriginDeque(), 0, GetOriginDeque().size() - 1);
-    // end = std::chrono::high_resolution_clock::now();
-    // this->duration_deque = std::chrono::duration_cast<std::chrono::nanoseconds>((end - start));
+    clock_gettime(CLOCK_PROCESS_CPUTIME_ID, &t);
+    this->duration_deque = ((double)(t.tv_sec * 1000.0) + ((double)(t.tv_nsec)*0.000001));
 }
 
 
