@@ -55,6 +55,11 @@ PmergeMe::PmergeMe(char *argv[])
         }
         i++;
     }
+    if (this->origin_vector.size() == 0)
+    {
+        std::cout << "Error: arg err" << std::endl;
+        exit(1);
+    }
 }
 
 
